@@ -1,10 +1,12 @@
-from flask import Flask, render_template
+import http.server
+import socketserver
 
-app = Flask(__name__) 
+PORT = 8080
 
-@app.route('/')
-def landing_page():
-    return render_template('index.html') 
+# إعداد معالج لتقديم الملفات الثابتة (مثل HTML, CSS, JavaScript)
+Handler = http.server.SimpleHTTPRequestHandler
 
-if __name__ == 'main':
-    app.run(debug=True) 
+# بدء الخادم
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print(f"Serving at port {PORT}")
+    httpd.serve_forever() 
