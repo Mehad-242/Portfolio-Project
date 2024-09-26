@@ -1,0 +1,346 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importance of Improving MySQL and SSH Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+	    
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+	h1{
+	    color: #333;
+	}
+        
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+	    
+        }
+        li {
+            margin: 10px 0;
+        }
+
+	.code-container {
+   	    background-color: black;
+   	    color: white;
+	    text-align: left;
+   	    padding: 40px;
+            border-radius: 5px;
+  	    
+	    margin-top: 50px;
+	    
+       }
+
+      .code-container::-webkit-scrollbar {
+            width: 8px;
+       }
+
+      .code-container::-webkit-scrollbar-thumb {
+  	   background: #ffffff;
+   	   border-radius: 4px;
+       }
+
+      .code-container::-webkit-scrollbar-thumb:hover {
+   	   background: #000000;
+       }
+
+      pre {
+           margin: 0;
+           text-align: left;
+       }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+	    margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Importance of Improving MySQL and SSH Settings</h1>
+</header>
+
+<section>
+    <h2>Purpose of This Work</h2>
+    <p>Improving MySQL and SSH settings is a crucial step to enhance security and improve efficiency. This work aims to simplify configuration and management processes, saving time and effort for users.</p>
+</section>
+
+<section>
+    <h2>What Has Been Improved</h2>
+    <p>The improvements included:</p>
+    <ul>
+        <li><strong>Facilitating Configuration Changes:</strong> Providing graphical interfaces or scripts to easily modify MySQL and SSH settings without accessing configuration files.</li>
+        <li><strong>Automating Key Setup:</strong> Implementing automatic procedures for initial configuration, such as setting up public and private keys without manual intervention.</li>
+        <li><strong>Enabling Change Notifications:</strong> Adding a notification system to remind users of changes made to the settings, making it easier to track modifications.</li>
+        <li><strong>Enhancing Security Settings:</strong> Automatically enabling default options that enhance security, such as disabling root login and limiting login attempts.</li>
+    </ul>
+</section>
+<h1> Bash code to set up and install MYSQL </h1>
+<div class="code-container">
+        <pre>
+          <code>
+	    <span style="color: blue;">#!/bin/bash</span><br>
+
+		  <span style="color: blue;"># Install MySQL if not already installed</span><br>
+		  <span style="color: yellow;">if</span> ! command -v mysql &> /dev/null; then<br>
+   		  echo "Installing MySQL..."<br>
+    		  sudo apt-get update<br>
+    		  sudo apt-get install -y mysql-server<br>
+		  <span style="color: yellow;">fi</span><br>
+
+		<span style="color: blue;"># Secure MySQL installation<br></span>
+		  <span style="color: yellow;">echo</span> "Do you want to secure your MySQL installation? (yes/no)"<br>
+		  read -r secure_installation<br>
+
+	   	  <span style="color: yellow;">if</span> [[ "$secure_installation" == "yes" ]]; then<br>
+    	  	  <span style="color: yellow;">echo</span> "Running mysql_secure_installation..."<br>
+    	   	  <span style="color: yellow;">sudo</span> mysql_secure_installation<br>
+	   	  <span style="color: yellow;">fi</span><br>
+
+		<span style="color: blue;"># Create a new MySQL user</span><br>
+	   	  <span style="color: yellow;">echo</span> "Do you want to create a new MySQL user? (yes/no)"
+	          read -r create_user<br>
+
+           	  if [[ "$create_user" == "yes" ]]; then<br>
+                  <span style="color: yellow;">echo</span> "Enter the username for the new MySQL user:"<br>
+                  read -r new_user<br>
+                  <span style="color: yellow;">echo</span> "Enter the password for the new MySQL user:"<br>
+                  read -r new_password<br>
+
+               <span style="color: blue;"># Connect to MySQL and create the new user</span><br>
+                 <span style="color: yellow;">sudo</span> mysql -e "CREATE USER '$new_user'@'localhost' IDENTIFIED BY '$new_password';"<br>
+                 <span style="color: yellow;">echo</span> "New MySQL user '$new_user' created."<br>
+    
+               <span style="color: blue;"># Ask for user privileges</span><br>
+                 <span style="color: yellow;">echo</span> "Do you want to grant all privileges to this user? (yes/no)"<br>
+                 read -r grant_privileges<br>
+                 <span style="color: yellow;">if</span> [[ "$grant_privileges" == "yes" ]]; then<br>
+                 <span style="color: yellow;">sudo</span> mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$new_user'@'localhost' WITH GRANT OPTION;"<br>
+                 <span style="color: yellow;">echo</span> "Granted all privileges to '$new_user'."<br>
+                 <span style="color: yellow;">fi</span><br>
+	         <span style="color: yellow;">fi</span><br>
+
+	       <span style="color: blue;"># Configure MySQL settings</span><br>
+	         mysql_config="/etc/mysql/mysql.conf.d/mysqld.cnf"<br>
+	         <span style="color: yellow;">if</span> [ -f "$mysql_config" ]; then<br>
+   	         <span style="color: yellow;">echo</span> "Modifying MySQL settings in $mysql_config..."<br>
+
+    	       <span style="color: blue;"># Ask for maximum connections</span><br>
+    	         <span style="color: yellow;">echo</span> "Enter the maximum number of connections (default is 151):"<br>
+    	         read -r max_connections<br>
+    	         <span style="color: yellow;">if</span> [[ -z "$max_connections" ]]; then<br>
+                 max_connections=151<br>
+    	         <span style="color: yellow;">fi</span><br>
+    	         <span style="color: yellow;">sudo</span> sed -i "s/^max_connections.*/max_connections = $max_connections/" "$mysql_config"<br>
+
+    	       <span style="color: blue;"># Ask for buffer pool size</span><br>
+    	         <span style="color: yellow;">echo</span> "Enter the InnoDB buffer pool size (default is 128M):"<br>
+    	         read -r buffer_pool_size<br>
+   	         <span style="color: yellow;">if</span> [[ -z "$buffer_pool_size" ]]; then<br>
+                 buffer_pool_size='128M'<br>
+    	         <span style="color: yellow;">fi</span><br>
+    	         <span style="color: yellow;">sudo</span> sed -i "s/^innodb_buffer_pool_size.
+			*/innodb_buffer_pool_size = $buffer_pool_size/" "$mysql_config"<br>
+
+    	       <span style="color: blue;"># Restart MySQL service to apply changes</span><br>
+    	         <span style="color: yellow;">echo</span> "Restarting MySQL service..."<br>
+    	         <span style="color: yellow;">sudo</span> systemctl restart mysql<br>
+	         <span style="color: yellow;">else</span>else<br>
+    	         <span style="color: yellow;">echo</span> "MySQL configuration file not found!"<br>
+	         <span style="color: yellow;">fi</span><br>
+
+	<span style="color: yellow;">echo</span> "MySQL setup completed successfully."<br>
+        </pre>
+     </div>
+
+    <h1> Bash code to set up and install SSH </h1>
+      <div class="code-container">
+        <pre>
+          <code>
+	    <span style="color: blue;">#!/bin/bash</span><br>
+	    # Install OpenSSH if not already installed
+	      if ! command -v sshd &> /dev/null; then
+               echo "Installing OpenSSH..."
+               sudo apt-get update
+               sudo apt-get install -y openssh-server
+	      fi
+
+	    # Setup SSH keys
+    	      echo "Do you want to set up key-based authentication only? (yes/no)"
+ 	      read -r setup_keys
+
+	      if [[ "$setup_keys" == "yes" ]]; then
+     	    # Create SSH keys if they don't exist
+   	      if [ ! -f ~/.ssh/id_rsa ]; then
+      	      echo "Creating SSH key..."
+              ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+    	      fi
+    
+    	    # Copy public key to the server
+    	      echo "Do you want to send the public key to the server? (yes/no)"
+    	      read -r send_key
+
+    	      if [[ "$send_key" == "yes" ]]; then
+      	        echo "Enter the server IP address:"
+                 read -r server_ip
+                ssh-copy-id -i ~/.ssh/id_rsa.pub "ubuntu@$server_ip"
+               fi
+             fi
+
+	    # Ask about accepting the server fingerprint
+	      echo "Do you want to accept the server fingerprint upon connection? (yes/no)"
+              read -r accept_fingerprint
+
+	    # Modify sshd_config file
+              sshd_config="/etc/ssh/sshd_config"
+	      if [ -f "$sshd_config" ]; then
+   	      echo "Modifying SSH settings in $sshd_config..."
+
+   	    # Disable root login
+              echo "PermitRootLogin no" | sudo tee -a "$sshd_config"
+
+            # Set maximum authentication attempts
+              echo "MaxAuthTries 3" | sudo tee -a "$sshd_config"
+
+  	    # Set client session duration
+   	      echo "ClientAliveInterval 300" | sudo tee -a "$sshd_config"
+    	      echo "ClientAliveCountMax 2" | sudo tee -a "$sshd_config"
+
+   	    # Ask about changing the port number
+   	      echo "Do you want to change the port number? (yes/no)"
+   	      read -r change_port
+   	     if [[ "$change_port" == "yes" ]]; then
+   	      echo "Enter the new port number:"
+   	      read -r new_port
+      	      echo "Port $new_port" | sudo tee -a "$sshd_config"
+             fi
+
+           # Encryption settings
+             echo "Ciphers aes256-ctr,aes192-ctr,aes128-ctr" | sudo tee -a "$sshd_config"
+	     echo "KexAlgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256" | sudo
+		tee -a "$sshd_config"
+
+           # Restart SSH service to apply changes
+             echo "Restarting SSH service..."
+             sudo systemctl restart sshd
+	    else
+             echo "SSH configuration file not found!"
+           fi
+         </pre>
+     </div>
+________________________________________________________________________________________
+__////////////////////////////////////////////////////////////////////////////////////__
+
+     <section>
+	<div class="footer"><b> <span style="color: #cc5500;">_____Organizing and dividing the sshd_config file contributes to facilitating the process of<br>
+        preparing and modifying settings manually, as this organization helps in understanding<br>
+        and following each section clearly, which makes it easier to enter the required modifications<br>
+        quickly and accurately.</span></b></div>
+     </section>
+
+	<p><span style="color: blue;">
+	# /etc/ssh/sshd_config<br>
+
+	# ===========================<br>
+	#          Key Settings<br>
+	# ===========================<br>
+
+	# Use SSH keys instead of passwords<br>
+	PasswordAuthentication no<br>
+	PubkeyAuthentication yes<br>
+	AuthorizedKeysFile .ssh/authorized_keys<br>
+
+	# Key Maintenance Settings<br>
+	# Disable the use of old keys<br>
+	HostKey /etc/ssh/ssh_host_rsa_key<br>
+	HostKey /etc/ssh/ssh_host_ecdsa_key<br>
+	HostKey /etc/ssh/ssh_host_ed25519_key<br>
+
+	# ===========================<br>
+	#      Access Permissions<br>
+	# ===========================<br>
+
+	# Allow access for specific users only<br>
+	AllowUsers user1 user2<br>
+
+	# Set session connection duration<br>
+	ClientAliveInterval 300<br>
+	ClientAliveCountMax 2<br>
+
+	# Set port number<br>
+	Port 22<br>
+	# You may change the port number to improve security<br>
+
+	# ===========================<br>
+	#        Security Settings<br>
+	# ===========================<br>
+
+	# Prevent access from root user<br>
+	PermitRootLogin no<br>
+
+	# Use strong encryption algorithms<br>
+	Ciphers aes256-ctr,aes192-ctr,aes128-ctr<br>
+	KexAlgorithms diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256<br>
+
+	# ===========================<br>
+	#       Logging Settings<br>
+	# ===========================<br>
+
+	# Log activities<br>
+	SyslogFacility AUTH<br>
+	LogLevel INFO<br>
+
+	# ===========================<br>
+	#      Connection Security<br>
+	# ===========================<br>
+
+	# Secure the connection<br>
+	UsePAM yes<br>
+	PermitEmptyPasswords no<br>
+	</span>
+	</p>
+
+<section>
+    <h2>How the Improvements Helped Save Time and Effort</h2>
+    <p>These improvements resulted in:</p>
+    <ul>
+        <li><strong>Accelerating Processes:</strong> Reducing the time spent on system setup, allowing users to focus on other tasks.</li>
+        <li><strong>Reducing Errors:</strong> Minimizing the need for manual handling of configuration files, which decreases the likelihood of human errors.</li>
+        <li><strong>Facilitating Learning:</strong> Simple interfaces and scripts make it easier for new users to understand how to manage systems.</li>
+        <li><strong>Effectively Enhancing Security:</strong> Automated procedures that improve system security without requiring user intervention each time.</li>
+    </ul>
+</section>
+
+<footer>
+    <p>© 2024 All rights reserved</p>
+</footer>
+
+</body>
+</html>

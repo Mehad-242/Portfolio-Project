@@ -7,7 +7,7 @@
     <title>Portfolio Project</title>
     <style>
         body {
-	    background-color: #cccccc;
+	    background-color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -22,6 +22,9 @@
             text-align: center;
         }
 
+	p {
+	    text-indent: 30px;
+	}
         .cover-image {
             width: 100%;
             height: 300px;
@@ -46,58 +49,41 @@
         }
         .section {
 	    background-color: white;
-            color: #4CAF50;
-            padding: 10px;
+            color: #006400;
+            padding: 50px;
             text-align: left;
 	    margin-top: 10px;
+	    
 	    
         }
 	.highlighted-text {
             background-color: white; 
-	    color: #4CAF50;
+	    color: #006400;
    	    padding: 50px;
   	    text-align: left; 
-  	    border-radius: 500px; 
+  	    border-radius: 5px; 
    	    line-height: 1.5; 
-   	    box-shadow: 3px 16px 8px rgba(2, 2, 2, 3.1);
+   	    box-shadow: 3px 8px 6px rgba(0, 0, 0, 0.1);
   	    margin-top: 50px;
 	}
-	
-        .code-container {
-   	    background-color: #fffff0;
-   	    color: #black;
-	    text-align: left;
-   	    padding: 40px;
-            border-radius: 5px;
-  	    overflow: auto; 
-    	    max-height: 500px; 
-	    max-width: 500px;
-     	    scrollbar-width: thin;
-	    margin-top: 100px;
-	    
-       }
+	summary {
+            cursor: pointer; 
+            color: #4CAF50;  
+            font-size: 18px;
+        }
 
-      .code-container::-webkit-scrollbar {
-            width: 8px;
-       }
+        summary:hover {
+            color: #cc5500; 
+        }
 
-      .code-container::-webkit-scrollbar-thumb {
-  	   background: #ffffff;
-   	   border-radius: 4px;
-       }
-
-      .code-container::-webkit-scrollbar-thumb:hover {
-   	   background: #000000;
-       }
-
-      pre {
-           margin: 0;
-           text-align: left;
-       }
+        details p {
+            margin-top: 10px; 
+            line-height: 1.6; 
+        }
 
       .button {
             background-color: white;
-            color: black;
+            color: #cc5500;
             padding: 15px 25px;
             text-decoration: none;
             font-size: 12px;
@@ -140,71 +126,173 @@
         <a href="#contact">Contact</a>
     </nav> 
 
+    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/ssh.jpg" alt="Cover Image" style="width:50%; height:200px;">
+
     <div class="section" id="about">
-	<img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/ssh.jpg" alt="Cover Image" style="width:50%; height:200px;">
+	
         <h2>About the Project</h2>
-        <p> My project focuses on SSH server configuration and MySQL setup across multiple environments. It aims to simplify the process of server setup, ensuring secure connections and efficient database management. This project provides developers and business owners with an easy way to manage servers, emphasizing security and high performance. It was developed using various technologies such as Bash scripting, SSH, and MySQL, reflecting my skills in server management and infrastructure.</p>
-    <div class="container">
-	<img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/server.jpg" alt="Cover Image" style="width:50%; height:200px;">
-        <p class="highlighted-text">هذا هو النص الذي طلبته، والخلفية تكون فقط في حدود النص.</p>
+        <p> My project focuses on SSH server configuration and MySQL setup across multiple environments. It aims <br>
+	    to simplify the process of server setup, ensuring secure connections and efficient database management.<br> 
+            This project provides developers and business owners with an easy way to manage servers, emphasizing <br>
+            security and high performance. It was developed using various technologies such as Bash scripting, SSH,<br>
+            and MySQL, reflecting my skills in server management and infrastructure.
+	</p>
     </div>
 
-    <div class="code-container">
-        <pre>
-          <code>
-	    <span style="color: blue;">//</span>
-	    <span style="color: yellow;">sudo</span> apt update
-	    <span style="color: yellow;">sudo </span> apt install openssh-client
-	    <span style="color: blue;">//</span>
-	    ssh-keygen -t <span style="color: yellow;">rsa</span> <span style="color: yellow;">-b</span> <span style="color: blue;">4096</span> <span style="color: read;">-C</span> <span style="color: blue;">"your_email@example.com"</span>
-	    <span style="color: blue;">//</span>
-	    <span style="color: yellow;">ssh</span>-copy-id <span style="color: red;">username@server_ip</span>
-	    <span style="color: blue;">//</span>
-	    <span style="color: yellow;">ssh</span> <span style="color: red;">username@server_ip</span>
-	    <span style="color: blue;">//</span>
-	    The authenticity of host 'server_ip (server_ip)' can't be established.
-	    RSA key fingerprint is SHA256:...
-	    Are you sure you want to continue connecting (yes/no)?
-	    <span style="color: blue;">//</span>
-	    <span style="color: blue;">//</span>
-	    ssh-keygen -t <span style="color: yellow;">rsa</span> <span style="color: yellow;">-b</span> <span style="color: blue;">4096</span> <span style="color: read;">-C</span> <span style="color: blue;">"your_email@example.com"</span>
-	    <span style="color: blue;">//</span>
-	    ssh-copy-id <span style="color: red;">username@server_ip</span>
-	    <span style="color: blue;">//</span>
-	    <span style="color: yellow;">ssh</span> <span style="color: red;">username@server_ip</span>
-	    <span style="color: blue;">//</span>
-	    <span style="color: yellow;">ssh</span> <span style="color: red;">username@server_ip</span> -p port_number
-            }
-          </code>
-        </pre>
-     </div>
-     
 
-     <div class="section" id="deployed">   
-        <a href="https://your-deployed-app-link.com" class="button">View Deployed Project</a>
+    
+	<img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/server.jpg" alt="Cover Image" style="width:50%; height:200px;">
+    
+
+	_____________________________________________________________________________________________________________________________ 
+    
+     <div class="highlighted-text">
+	
+	       <b>Server Connection and Security Settings</b><br> 
+	        In this section, we highlight the steps for server connection settings and the importance of security in operational environments. These settings include the following:<br>
+
+		<b>1. Server Connection Settings:</b><br>
+
+		Installing SSH: Ensure that the SSH service is installed on the server using the following command:<br>
+
+		</span> <span style="color: #cc5500;">sudo apt-get install openssh-server</span><br>
+		  
+		<b>2. Server Connection Methods:</b><br>
+		<details>
+		<summary>Read More</summary>
+
+		<p>There are two main ways to connect to the server:<br>
+
+		Using Keys:<br>
+
+		Generate the keys using the command:<br>
+
+		</span> <span style="color: #cc5500;">ssh-keygen -t rsa -b 4096</span><br>
+
+		Copy the public key to the remote server:<br>
+
+		</span> <span style="color: #cc5500;">ssh-copy-id user@remote_server</span><br>
+
+		Using Username and Password:<br>
+
+		It is recommended to use strong and complex usernames and passwords to ensure the security of the server connection.<br>
+
+		<b>3. Connecting to the Server:<br></b>
+
+		Server Address: Specify the correct IP address or domain name of the server to ensure an effective connection, such as:<br>
+
+		</span> <span style="color: #cc5500;">ssh user@192.168.1.100</span><br>
+
+		Connection Port: Make sure to use the correct port (e.g., 22 for SSH or 3306 for MySQL) to access the desired service. You can specify the port during the connection:<br>
+
+		</span> <span style="color: #cc5500;">ssh -p 22 user@remote_server</span><br>
+
+		<b>4. Accepting the Fingerprint:</b><br>
+
+		When connecting to the server for the first time, you will be prompted to accept the server’s fingerprint to verify the server's identity. You should verify the fingerprint and match it with the known one.<br>
+
+		<b>5. sshd_config File Settings:</b><br>
+
+		This file includes important settings for the SSH server and can be modified to enhance the security of the connection. The most important settings are:<br>
+
+		Changing the Default Connection Port:<br>
+
+		</span> <span style="color: #cc5500;">Port 2222</span><br>
+
+		(It is recommended to change the default port 22 to another number for enhanced security).<br>
+
+		Disabling Root Login:<br>
+
+		PermitRootLogin no<br>
+
+		(To prevent direct login as the root user).<br>
+
+		Allowing Specific IP Addresses:<br>
+
+		</span> <span style="color: #cc5500;">AllowUsers user1@192.168.1.100 user2@192.168.1.200</span><br>
+
+		(To specify certain IP addresses that are allowed to connect to the server).<br>
+
+		Using Public Key Authentication Only:<br>
+
+		</span> <span style="color: #cc5500;">PasswordAuthentication no</span><br>
+
+		(To disable password authentication and allow keys only).<br>
+
+		Specifying the Protocol Used:<br>
+
+		</span> <span style="color: #cc5500;">Protocol 2</span><br>
+
+		(To use the more secure SSH-2 protocol).<br>
+
+		Setting the Maximum Number of Failed Attempts:<br>
+
+		</span> <span style="color: #cc5500;">MaxAuthTries 3</span><br>
+
+		(To specify the number of authentication attempts before blocking the connection).<br>
+
+		Session Settings:<br>
+
+		Closing the connection after a period of inactivity:<br>
+
+		</span> <span style="color: #cc5500;">ClientAliveInterval 300<br>
+
+		ClientAliveCountMax 0</span><br>
+
+		(This sets the connection to close after 5 minutes of inactivity).<br>
+
+		After configuring these options and modifying the sshd_config file, make sure to restart the SSH service to apply the changes:<br>
+
+		</span> <span style="color: #cc5500;">sudo systemctl restart ssh</span><br>
+
+		These settings enhance the security of the server connection and reduce the risk of unauthorized access. </p> 
+	    
+	 </details>
+     </div>
+
+
+     <div class="section" id="deployed"> 
+	   <p> In the modern technological world, setting up environments correctly is crucial to ensure high<br>
+	    performance and security. In this page, we reviewed the known settings for SSH and MySQL, which<br>
+	    serve as a strong foundation for any system that works to secure and manage data.<br>
+	    However, our work does not stop there. Throughout this project, I developed a set of advanced<br> 
+	    configurations aimed at improving performance and significantly enhancing security. These<br>
+	    configurations were based on the latest standards and best practices in the industry to ensure<br>
+	    a smooth and effective user experience.</p><br>
+
+	     <p>    I invite you now to move on to the next page, where I will share with you the changes and <br>
+	    enhancements I have made. You will find detailed insights into how to implement these new settings<br> 
+	    and the benefits they can bring to your project or system.</p><br>
+            Join me on the next page to see how these changes can make a significant difference!
+      
+        <a href="Developed_settings.html" class="button">View Deployed Project</a>
      </div> 
+
+
 
      <div class="contact" id="contact" >
         
         <a href="mailto:mehadboosh@gmail.com">
-	    <img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/email.png" alt="Email" width="30" height="30">
+	    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/email.png" alt="Email" width="30" height="30">
 	</a>
 	<a href="https://github.com/Mehad-242" target="_blank">
-	    <img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/git.png" alt="GitHub" width="30" height="30">
+	    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/git.png" alt="GitHub" width="30" height="30">
 	</a>
 	<a href="tel:+249922139284">
-	    <img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/phone.png" alt="phone" width="30" height="30">
+	    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/phone.png" alt="phone" width="30" height="30">
 	</a>
 	<a href="https://www.facebook.com/mehad.gasim" target="_blank">
-	    <img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/facebook.jpg" alt="Facebook" width="30" height="30">
+	    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/facebook.jpg" alt="Facebook" width="30" height="30">
 	</a>
 	<a href="https://www.linkedin.com/in/mehad-boosh-899a29265" target="_blank">
-	    <img src="C:/Users/MEHAD/Desktop/my_flasc_project/static/images/linked.jpg" alt="LinkedIn" width="30" height="30">
+	    <img src="C:/Users/MEHAD/Desktop/Portfolio-Project/static/images/linked.jpg" alt="LinkedIn" width="30" height="30">
 	</a>
     </div> 
+
 
     <footer>
         <p>&copy; 2024 Portfolio Project. Developed by Mehad Gasim Adam.</p>
     </footer>
+
 </body>
 </html>
